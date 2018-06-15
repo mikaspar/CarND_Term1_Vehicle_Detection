@@ -70,13 +70,13 @@ I tried various combinations of parameters and I finally used 9 orientations to 
 
 #### 3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
-I trained a linear SVM using different 3 types of features: HOG, Color Histogram and spatially binned color features. My resulting feature vector includes HOG and color histogram features. For the training were used pictures with 64x64 resolution. The testing accuracy reached 97.5 % on the testing set. 
+I tried to trai the linear SVM using different 3 types of features: HOG, Color Histogram and Spatial binned features. My resulting feature vector includes a scaled HOG and color histogram features. For the training were used pictures with 64x64 resolution. The testing accuracy reached 97.5 % on the testing set. 
 
 ### Sliding Window Search
 
 #### 1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
 
-I implemented the search using the find_cars function in IPython Notebook. It searches through area of interest (ystart,ystop)  in the image with windows of scales 1-2.2 of (64,64) of original training images.    
+I implemented the search using the find_cars function in IPython Notebook. It searches through area of interest (ystart,ystop, whole image width) in the image. It uses search of scales 1-2.2 of (64,64) of original training images.    
 
 
 #### 2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
