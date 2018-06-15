@@ -46,9 +46,12 @@ You're reading it!
 
 I started by reading in all the `vehicle` and `non-vehicle` images.  Here is an example of one of each of the `vehicle` and `non-vehicle` classes:
 
-Vehicle
+Vehicle            |  Non-Vehicle
+:-----------------:|:-------------------------:
+![][image1]        |  ![][image2]
 
-![alt text][image1] | [image2]
+
+
 
 Then I implemented the hog function from the sklearn library. The code for this step is contained in the get_hog_features of the IPython notebook. 
 
@@ -56,7 +59,10 @@ I then explored different color spaces and different parameters (`orientations`,
 
 Here is an example using the `YCrCb` color space and HOG parameters of `orientations=9`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`:
 
-![alt text][image3] ![alt text][image4]
+Vehicle            |  Non-Vehicle
+:-----------------:|:-------------------------:
+![][image3]        |  ![][image4]
+
 
 #### 2. Explain how you settled on your final choice of HOG parameters.
 
@@ -64,21 +70,32 @@ I tried various combinations of parameters and I finally used 9 orientations to 
 
 #### 3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
-I trained a linear SVM using different 3 types of features: HOG, Color Histogram and spatially binned color features. My resulting feature vector includes HOG and color histogram features.   
+I trained a linear SVM using different 3 types of features: HOG, Color Histogram and spatially binned color features. My resulting feature vector includes HOG and color histogram features. For the training were used pictures with 64x64 resolution. The testing accuracy reached 97.5 % on the testing set. 
 
 ### Sliding Window Search
 
 #### 1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
 
-I implemented the se
+I implemented the search using the find_cars function in IPython Notebook. It searches through area of interest (ystart,ystop)  in the image with windows of scales 1-2.2 of (64,64) of original training images.    
 
-![alt text][image3]
 
 #### 2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
 
-Ultimately I searched on two scales using YCrCb 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result.  Here are some example images:
+Ultimately I searched on 8 scales using YCrCb 3-channel HOG features plus histograms of color in the feature vector, which provided a nice result. I got also much better results on recognicition of distant vehicles using L1-Normalisation instead of using L2-Hys.(although in theory it sould be exactly the other way around.(http://lear.inrialpes.fr/people/triggs/pubs/Dalal-cvpr05.pdf)
 
-![alt text][image4]
+### Here are six frames with resulting bounding boxes and their corresponding heatmaps:
+
+![alt text][image5]
+![alt text][image6]
+![alt text][image7]
+![alt text][image8]
+![alt text][image9]
+![alt text][image10]
+![alt text][image11]
+![alt text][image12]
+![alt text][image13]
+![alt text][image14]
+![alt text][image15]
 ---
 
 ### Video Implementation
@@ -89,21 +106,13 @@ Here's a [link to my video result](./project_video.mp4)
 
 #### 2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
 
-I recorded the positions of positive detections in each frame of the video.  From the positive detections I created a heatmap and then thresholded that map to identify vehicle positions.  I then used `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap.  I then assumed each blob corresponded to a vehicle.  I constructed bounding boxes to cover the area of each blob detected.  
+I recorded the positions of positive detections in each frame of the video.  From the positive detections I created a heatmap and then thresholded with 3 detections that map to identify vehicle positions. Then I introduced the Vehicled_detected class with labeled_detections variable and add_detection method.
+
+The add_detection method contains the  thresholded heat map of the last 20 frames. The resulting heatmap is a sum of the last 20 frames and thresholded with history_threshold = 25. 
+
+On resulting heat map I used `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap.  I then assumed each blob corresponded to a vehicle.  I constructed bounding boxes to cover the area of each blob detected.  
 
 Here's an example result showing the heatmap from a series of frames of video, the result of `scipy.ndimage.measurements.label()` and the bounding boxes then overlaid on the last frame of video:
-
-### Here are six frames with resulting bounding boxes and their corresponding heatmaps:
-
-![alt text][image5]
-
-### Here is the output of `scipy.ndimage.measurements.label()` on the integrated heatmap from all six frames:
-![alt text][image6]
-
-### Here the resulting bounding boxes are drawn onto the last frame in the series:
-![alt text][image7]
-
-
 
 ---
 
@@ -111,5 +120,5 @@ Here's an example result showing the heatmap from a series of frames of video, t
 
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+The pipeline still has issues in recognition of distant vehicles on one side and false positive on the other side. If I had more time to optimize the performance of the pipeline I would introduce a Vehicle Class with more properties. Each blob found using label function would be check on its size depending on its position on the image. If plausible the new Object of the class would be constructed.  Each Object would be append to the list of objects and tracked.( I would define the plausible max position change per frame... In real implementation a use of fusion of detections of another sensor (e.g. radar), would significantly improve the accuracy of the vehicle detection.   
 
