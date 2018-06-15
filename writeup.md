@@ -104,9 +104,9 @@ Here's a [link to my video result](./project_video.mp4)
 
 #### 2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
 
-I recorded the positions of positive detections in each frame of the video.  From the positive detections I created a heatmap and then thresholded with 3 detections that map to identify vehicle positions. Then I introduced the Vehicled_detected class with labeled_detections variable and add_detection method.
+I recorded the positions of positive detections in each frame of the video.  From the positive detections I created a heatmap and then thresholded with at least 3 detections on the map to identify vehicle positions. Then I introduced the Vehicled_detected class with labeled_detections variable and add_detection method.
 
-The add_detection method contains the  thresholded heat map of the last 20 frames. The resulting heatmap is a sum of the last 20 frames and thresholded with history_threshold = 25. 
+The add_detection method contains the thresholded heat map of the last 20 frames. The resulting heatmap is a sum of the last 20 frames and thresholded with history_threshold = 25. 
 
 On resulting heat map I used `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap.  I then assumed each blob corresponded to a vehicle.  I constructed bounding boxes to cover the area of each blob detected.  
 
@@ -118,5 +118,5 @@ Here's an example result showing the heatmap from a series of frames of video, t
 
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-The pipeline still has issues in recognition of distant vehicles on one side and false positive on the other side. If I had more time to optimize the performance of the pipeline I would introduce a Vehicle Class with more properties. Each blob found using label function would be check on its size depending on its position on the image. If plausible the new Object of the class would be constructed.  Each Object would be append to the list of objects and tracked.( I would define the plausible max position change per frame... In real implementation a use of fusion of detections of another sensor (e.g. radar), would significantly improve the accuracy of the vehicle detection.   
+The pipeline still has issues in recognition of distant vehicles on one side and false positives on the other side. If I had more time to optimize the performance of the pipeline I would introduce a Vehicle Class with more properties. Each blob found using label function would be check on its size depending on its position on the image. If plausible the new Object of the class would be constructed.  Each Object would be append to the list of objects and tracked.( I would define the plausible max position change per frame... In real implementation a use of fusion of detections with another sensor (e.g. radar), would significantly improve the accuracy of the vehicle detection and remove false positives.   
 
