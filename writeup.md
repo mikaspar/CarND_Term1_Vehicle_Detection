@@ -48,7 +48,7 @@ I started by reading in all the `vehicle` and `non-vehicle` images.  Here is an 
 
 Vehicle            |  Non-Vehicle
 :-----------------:|:-------------------------:
-![][image1]        |  ![][image2]
+![][image1]        |  [image2]
 
 
 
@@ -59,7 +59,7 @@ I then explored different color spaces and different parameters (`orientations`,
 
 Here is an example using the `YCrCb` color space and HOG parameters of `orientations=9`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`:
 
-Vehicle            |  Non-Vehicle
+Vehicle            |  HOG
 :-----------------:|:-------------------------:
 ![][image3]        |  ![][image4]
 
@@ -85,17 +85,15 @@ Ultimately I searched on 8 scales using YCrCb 3-channel HOG features plus histog
 
 ### Here are six frames with resulting bounding boxes and their corresponding heatmaps:
 
-![alt text][image5]
-![alt text][image6]
-![alt text][image7]
-![alt text][image8]
-![alt text][image9]
-![alt text][image10]
-![alt text][image11]
-![alt text][image12]
-![alt text][image13]
-![alt text][image14]
-![alt text][image15]
+Image with Bound Boxes |  HOG
+:---------------------:|:-------------------------:
+![][image5]            |  ![][image6]
+![][image7]            |  ![][image8]
+![][image9]            |  ![][image10]
+![][image11]           |  ![][image12]
+![][image13]           |  ![][image14]
+![][image15]           |  ![][image16]
+
 ---
 
 ### Video Implementation
