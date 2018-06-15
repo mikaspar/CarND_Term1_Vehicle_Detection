@@ -12,7 +12,7 @@ The goals / steps of this project are the following:
 [//]: # (Image References)
 [image1]: ./output_images/car.jpg
 [image2]: ./output_images/no_car.jpg
-[image3]: ./output_images/car_HoG.jpg
+[image3]: ./output_images/Car_HoG.jpg
 [image4]: ./output_images/HoG.jpg
 [image5]: ./output_images/test1.jpg
 [image6]: ./output_images/heatmap_test1.jpg
