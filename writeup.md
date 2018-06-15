@@ -48,7 +48,7 @@ I started by reading in all the `vehicle` and `non-vehicle` images.  Here is an 
 
 Vehicle            |  Non-Vehicle
 :-----------------:|:-------------------------:
-![][image1]        |  [image2]
+![][image1]        |  ![][image2] 
 
 
 
@@ -61,7 +61,7 @@ Here is an example using the `YCrCb` color space and HOG parameters of `orientat
 
 Vehicle            |  HOG
 :-----------------:|:-------------------------:
-![][image3]        |  ![][image4]
+![][image1]        |  ![][image4]
 
 
 #### 2. Explain how you settled on your final choice of HOG parameters.
