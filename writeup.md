@@ -57,7 +57,7 @@ Then I implemented the hog function from the sklearn library. The code for this 
 
 I then explored different color spaces and different parameters (`orientations`, `pixels_per_cell`, and `cells_per_block`). 
 
-Here is an example using the `YCrCb` color space and HOG parameters of `orientations=9`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`:
+Here is an example using the `YCrCb` color space and HOG parameters of `orientations=11`, `pixels_per_cell=(16, 16)` and `cells_per_block=(2, 2)`:
 
 Vehicle            |  HOG
 :-----------------:|:-------------------------:
@@ -66,11 +66,11 @@ Vehicle            |  HOG
 
 #### 2. Explain how you settled on your final choice of HOG parameters.
 
-I tried various combinations of parameters and I finally used 9 orientations to keep both the recognition accuracy and reasonable feature vector length and `YCrCb` color space. 
+I tried various combinations of parameters and I finally used 11 orientations, 16 pixel per cell and 2 cell per block in each direction to keep both the recognition accuracy and reasonable feature vector length and `YCrCb` color space. 
 
 #### 3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
-I tried to trai the linear SVM using different 3 types of features: HOG, Color Histogram and Spatial binned features. My resulting feature vector includes a scaled HOG and color histogram features. For the training were used pictures with 64x64 resolution. The testing accuracy reached 97.5 % on the testing set. 
+I tried to trai the linear SVM using different 3 types of features: HOG, Color Histogram and Spatial binned features. My resulting feature vector includes a scaled HOG and color histogram features only. For the training were used pictures with 64x64 resolution. The testing accuracy reached 97.5 % on the testing set. 
 
 ### Sliding Window Search
 
