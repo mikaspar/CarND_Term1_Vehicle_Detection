@@ -61,7 +61,7 @@ Here is an example using the `YCrCb` color space and HOG parameters of `orientat
 
 Vehicle            |  HOG
 :-----------------:|:-------------------------:
-![][image1]        |  ![][image4]
+![][image3]        |  ![][image4]
 
 
 #### 2. Explain how you settled on your final choice of HOG parameters.
