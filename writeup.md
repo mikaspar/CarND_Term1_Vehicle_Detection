@@ -10,13 +10,24 @@ The goals / steps of this project are the following:
 * Estimate a bounding box for vehicles detected.
 
 [//]: # (Image References)
-[image1]: ./examples/car_not_car.png
-[image2]: ./examples/HOG_example.jpg
-[image3]: ./examples/sliding_windows.jpg
-[image4]: ./examples/sliding_window.jpg
-[image5]: ./examples/bboxes_and_heat.png
-[image6]: ./examples/labels_map.png
-[image7]: ./examples/output_bboxes.png
+[image1]: ./output_images/car.jpg
+[image2]: ./output_images/no_car.jpg
+[image3]: ./output_images/car_HoG.jpg
+[image4]: ./output_images/HoG.jpg
+[image5]: ./output_images/test1.jpg
+[image6]: ./output_images/heatmap_test1.jpg
+[image7]: ./output_images/test2.jpg
+[image8]: ./output_images/heatmap_test2.jpg
+[image9]: ./output_images/test3.jpg
+[image10]: ./output_images/heatmap_test3.jpg
+[image11]: ./output_images/test4.jpg
+[image12]: ./output_images/heatmap_test4.jpg
+[image13]: ./output_images/test5.jpg
+[image14]: ./output_images/heatmap_test5.jpg
+[image15]: ./output_images/test6.jpg
+[image16]: ./output_images/heatmap_test6.jpg
+
+
 [video1]: ./project_video.mp4
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/513/view) Points
@@ -33,32 +44,33 @@ You're reading it!
 
 #### 1. Explain how (and identify where in your code) you extracted HOG features from the training images.
 
-The code for this step is contained in the first code cell of the IPython notebook (or in lines # through # of the file called `some_file.py`).  
-
 I started by reading in all the `vehicle` and `non-vehicle` images.  Here is an example of one of each of the `vehicle` and `non-vehicle` classes:
 
-![alt text][image1]
+Vehicle
 
-I then explored different color spaces and different `skimage.hog()` parameters (`orientations`, `pixels_per_cell`, and `cells_per_block`).  I grabbed random images from each of the two classes and displayed them to get a feel for what the `skimage.hog()` output looks like.
+![alt text][image1] | [image2]
 
-Here is an example using the `YCrCb` color space and HOG parameters of `orientations=8`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`:
+Then I implemented the hog function from the sklearn library. The code for this step is contained in the get_hog_features of the IPython notebook. 
 
+I then explored different color spaces and different parameters (`orientations`, `pixels_per_cell`, and `cells_per_block`). 
 
-![alt text][image2]
+Here is an example using the `YCrCb` color space and HOG parameters of `orientations=9`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`:
+
+![alt text][image3] ![alt text][image4]
 
 #### 2. Explain how you settled on your final choice of HOG parameters.
 
-I tried various combinations of parameters and...
+I tried various combinations of parameters and I finally used 9 orientations to keep both the recognition accuracy and reasonable feature vector length and `YCrCb` color space. 
 
 #### 3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
-I trained a linear SVM using...
+I trained a linear SVM using different 3 types of features: HOG, Color Histogram and spatially binned color features. My resulting feature vector includes HOG and color histogram features.   
 
 ### Sliding Window Search
 
 #### 1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
 
-I decided to search random window positions at random scales all over the image and came up with this (ok just kidding I didn't actually ;):
+I implemented the se
 
 ![alt text][image3]
 
@@ -81,7 +93,7 @@ I recorded the positions of positive detections in each frame of the video.  Fro
 
 Here's an example result showing the heatmap from a series of frames of video, the result of `scipy.ndimage.measurements.label()` and the bounding boxes then overlaid on the last frame of video:
 
-### Here are six frames and their corresponding heatmaps:
+### Here are six frames with resulting bounding boxes and their corresponding heatmaps:
 
 ![alt text][image5]
 
