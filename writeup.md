@@ -85,7 +85,7 @@ Ultimately I searched on 8 scales using YCrCb 3-channel HOG features plus histog
 
 ### Here are six frames with resulting bounding boxes and their corresponding heatmaps:
 
-Image with Bound Boxes |  HOG
+Image with Bound Boxes |  Thresholded Heatmap
 :---------------------:|:-------------------------:
 ![][image5]            |  ![][image6]
 ![][image7]            |  ![][image8]
